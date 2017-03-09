@@ -1,0 +1,51 @@
+apply plugin: 'java'                           
+apply plugin: 'eclipse'												
+apply plugin: 'application'
+
+apply plugin: 'java-library'
+sourceCompatibility = 1.8 //컴파일 할때 적용할 jdk버전을 지정
+
+tasks.withType(JavaCompile){
+	options.encoding = 'UTF-8'
+}									// UTF-8로 지정	
+repositories {
+    jcenter()
+}
+
+
+dependencies {
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	compile group: 'mysql', name: 'mysql-connector-java', version: '5.+' 
+	// https://mvnrepository.com/artifact/org.mybatis/mybatis
+	compile group: 'org.mybatis', name: 'mybatis', version: '3.4.2'
+	// https://mvnrepository.com/artifact/log4j/log4j
+	compile group: 'log4j', name: 'log4j', version: '1.2.17'
+	
+	
+	
+	// https://mvnrepository.com/artifact/junit/junit
+	testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+version = 1.0
+mainClassName = 'kr.or.dgit_gradle_project.StudentUI'
+jar {
+	baseName = 'GradleTest'
+	appendix = 'bin'
+	manifest{
+		attributes 'Title':baseName, 'Version': version, 'Main-Class': mainClassName
+	}
+	//archiveName 'StudentManagement.jar' // baseName, appendix속성이 무시
+	dependsOn configurations.runtime // 실행 가능한 jar 파일 생성
+}
+
+task myJavadocs(type: Javadoc){
+	source = sourceSets.main.allJava
+}
+
+uploadArchives{
+	repositories{
+		flatDir{
+			dirs 'repos'
+		}
+	}
+}
