@@ -5,5 +5,10 @@
 	<select id="selectStudentByAll" resultType="Student">
 		select stud_id, name, email, dob from student
 	</select>
+	<insert id="insertStudent" parameterType="Student">
+		insert into student (stud_id, name, email, dob)
+		values(#{studId}, #{name}, #{email}, #{dob})        <!--  자동으로 겟메소드 호출해서 res 넣어줌 -->
+	</insert>
+	
 	
 </mapper>
