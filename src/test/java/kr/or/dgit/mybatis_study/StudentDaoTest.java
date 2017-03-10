@@ -10,6 +10,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import kr.or.dgit.mybatis_study.dao.StudentDao;
+import kr.or.dgit.mybatis_study.dto.PhoneNumber;
 import kr.or.dgit.mybatis_study.dto.Student;
 import kr.or.dgit.mybatis_study.service.StudentService;
 
@@ -41,6 +43,14 @@ public class StudentDaoTest {
 		
 		Assert.assertEquals(1, res);
 	}*/
+	@Test
+	public void testInsertStudentWithPhone(){
+		Student std = new Student(7, "이교민", "jsw@test.co.kr", new Date(), new PhoneNumber("010-2222-2222"));
+		int res = studentService.insertStudentWithPhoe(std);
+		
+		Assert.assertEquals(1, res);
+	}
+	
 	@Test
 	public void testselectStudentByNo() {
 		Student student = studentService.selectStudentByNo(5);
